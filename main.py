@@ -3,9 +3,9 @@ import pygame as pg
 def main():
     pg.init()
 
-    # logo = pg.image.load('logo.png')
-    # pg.display.set_icon(logo)
-    pg.display.set_caption('Tetris')
+    logo = pg.image.load('logo.png')
+    pg.display.set_icon(logo)
+    pg.display.set_caption('Tetris by Redwane')
 
     pg.display.set_mode((800, 600))
 
