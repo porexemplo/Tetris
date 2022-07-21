@@ -1,7 +1,16 @@
 import pygame as pg
 from screeninfo import get_monitors
+import os
 
 SCREEN_HEIGHT = get_monitors()[0].height
+
+
+def get_shape(shape: int, colour: int):
+    path = os.path.join('assets',
+                        'shape-' + str(shape),
+                        'shape-' + str(shape) + '-' + str(colour) + '.png'
+                        )
+    return pg.image.load(path)
 
 
 def main():
@@ -22,6 +31,12 @@ def main():
     image.set_colorkey((255, 0, 255))
     image.set_alpha(128)
     screen.blit(image, (100, 100))
+
+    # path = os.path.join('assets', 'shape-1', 'shape-1-0.png')
+    # shape_1 = pg.image.load(path)
+    # screen.blit(shape_1, (200, 200))
+
+    screen.blit(get_shape(4, 0), (200, 200))
 
     while 1:
         for event in pg.event.get():
