@@ -1,5 +1,9 @@
 # Tetris
 
+### Dependencies
+- **pygame** `python3 -m pip install -U pygame --user`
+- **screeninfo** `python3 -m pip install screeninfo`
+
 ---
 ### LOGs
 
