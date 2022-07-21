@@ -3,6 +3,7 @@ from screeninfo import get_monitors
 import os
 
 SCREEN_HEIGHT = get_monitors()[0].height
+SCREEN_WIDTH  = get_monitors()[0].width
 
 
 def get_shape(shape: int, colour: int):
@@ -36,11 +37,18 @@ def main():
     # shape_1 = pg.image.load(path)
     # screen.blit(shape_1, (200, 200))
 
-    screen.blit(get_shape(4, 0), (200, 200))
+
+    xShape, yShape = 100, 100
+    screen.blit(get_shape(3, 0), (xShape, yShape))
 
     while 1:
         for event in pg.event.get():
             if event.type == pg.QUIT: return None
+        if yShape < SCREEN_HEIGHT - 100:
+            if xShape < .5*SCREEN_WIDTH: xShape += 1
+            yShape += 2
+        screen.fill((0, 40, 0))
+        screen.blit(get_shape(3, 0), (xShape, yShape))
         pg.display.flip()
 
 
