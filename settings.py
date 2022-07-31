@@ -1,13 +1,19 @@
 import pygame as pg
 from screeninfo import get_monitors
 
-SCREEN_HEIGHT = get_monitors()[0].height
 SCREEN_WIDTH  = get_monitors()[0].width
+SCREEN_HEIGHT = get_monitors()[0].height
 
-HEIGHT = 0.8*SCREEN_HEIGHT
-WIDTH = 0.8*SCREEN_HEIGHT
+WIDTH = 0.6*SCREEN_HEIGHT
+HEIGHT = 0.5*SCREEN_HEIGHT
 
 SCREEN = pg.display.set_mode((HEIGHT, WIDTH))
 
-CELL_HEIGHT = HEIGHT // 21
-CELL_WIDTH = WIDTH // 20
+W_BOUND = 20
+H_BOUND = 21
+
+CELL_WIDTH = WIDTH // W_BOUND
+CELL_HEIGHT = HEIGHT // W_HEIGHT
+
+# Colors
+BLACK = (0, 0, 0)
