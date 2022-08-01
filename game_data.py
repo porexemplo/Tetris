@@ -24,6 +24,30 @@ IMAGE_SET = [
         for i in range(0, 7)
 ]
 
+# Shapes
+SHAPE_L = [
+    (5, 0),
+    (5, 1),
+    (5, 2), (6, 2)
+]
+SHAPE_O = [
+    (5, 0), (6, 0),
+    (5, 1), (6, 1)
+]
+SHAPE_N = [
+            (6, 0),
+    (5, 1), (6, 1),
+    (5, 2)
+]
+SHAPE_I = [
+    (5, 0),
+    (5, 1),
+    (5, 2),
+    (5, 3)
+]
+
+SHAPES = [SHAPE_I, SHAPE_L, SHAPE_O, SHAPE_N]
+
 # Colors
 YELLOW  = 0
 BLUE    = 1

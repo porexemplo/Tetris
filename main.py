@@ -4,9 +4,6 @@ from structs import Cell, Grid
 from game_data import *
 
 
-grid = Grid()   
-
-
 def update_window():
     logo = pg.image.load('logo.png')
     pg.display.set_icon(logo)
@@ -17,9 +14,11 @@ def update_window():
 
 
 def main():
+    grid = Grid()   
     pg.init()
     update_window()
     grid.set_border()
+    grid.set_current_shape()
     grid.draw(SCREEN)
     pg.display.update()
 
