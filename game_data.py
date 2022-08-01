@@ -14,6 +14,7 @@ SCREEN = pg.display.set_mode((WIDTH, HEIGHT))
 W_BOUND_COLUMNS = 12
 H_BOUND_COLUMNS = 21
 
+FPS = 60
 
 CELL_WIDTH = (.70*WIDTH) // W_BOUND_COLUMNS
 CELL_HEIGHT = HEIGHT // H_BOUND_COLUMNS
@@ -26,24 +27,24 @@ IMAGE_SET = [
 
 # Shapes
 SHAPE_L = [
-    (5, 0),
-    (5, 1),
-    (5, 2), (6, 2)
+    [5, 0],
+    [5, 1],
+    [5, 2], [6, 2]
 ]
 SHAPE_O = [
-    (5, 0), (6, 0),
-    (5, 1), (6, 1)
+    [5, 0], [6, 0],
+    [5, 1], [6, 1]
 ]
 SHAPE_N = [
-            (6, 0),
-    (5, 1), (6, 1),
-    (5, 2)
+            [6, 0],
+    [5, 1], [6, 1],
+    [5, 2]
 ]
 SHAPE_I = [
-    (5, 0),
-    (5, 1),
-    (5, 2),
-    (5, 3)
+    [5, 0],
+    [5, 1],
+    [5, 2],
+    [5, 3]
 ]
 
 SHAPES = [SHAPE_I, SHAPE_L, SHAPE_O, SHAPE_N]

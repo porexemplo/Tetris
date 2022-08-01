@@ -10,12 +10,12 @@ def update_window():
     pg.display.set_caption('Tetris by YummyBread')
     
     SCREEN.fill(RGB_BLACK)
-    pg.display.update()
 
 
 def main():
-    grid = Grid()   
+    grid = Grid()
     pg.init()
+    clock = pg.time.Clock()
     update_window()
     grid.set_border()
     grid.set_current_shape()
@@ -23,8 +23,16 @@ def main():
     pg.display.update()
 
     while 1:    # Main game loop
+        clock.tick(25)
         for event in pg.event.get():
             if event.type == pg.QUIT: return
+        
+        grid.update()
+        update_window()
+        grid.set_border()
+        grid.draw(SCREEN)
+        pg.display.update()
+        
 
 
 if __name__ == '__main__':

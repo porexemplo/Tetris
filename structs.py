@@ -32,6 +32,7 @@ class Grid:
         for x in range(W_BOUND_COLUMNS)
         ]
         self.current_shape = None
+        self.current_content = None
     
     def set_border(self) -> None:
         for cell in self.cells:
@@ -41,18 +42,41 @@ class Grid:
                 cell.set_content(GREY)
     
     def get_cell(self, x, y) -> Cell:
+        if x+y*W_BOUND_COLUMNS > len(self.cells): return None
         return self.cells[x+y*W_BOUND_COLUMNS]
 
     def set_current_shape(self) -> None:
         if self.current_shape is not None: return
         self.current_shape = SHAPES[randint(0, 3)]
-        temp_content = randint(0, 5)
+        self.current_content = randint(0, 5)
         for x, y in self.current_shape:
-            self.get_cell(x, y).set_content(temp_content)
+            self.get_cell(x, y).set_content(self.current_content)
+
+    def get_lower_cells(self) -> list():
+        checked = dict()
+        for coord in self.current_shape:
+            if str(coord[0]) not in checked:
+                checked[str(coord[0])] = coord[1]; pass
+            checked[str(coord[0])] = max(coord[1], checked[str(coord[0])])
+        return [(int(i), j) for i, j in checked.items()]
+
+    def can_move(self) -> bool:
+        bellow_cells = [self.get_cell(x, y+1) for x, y in self.get_lower_cells()]
+        for cell in bellow_cells:
+            if cell == None or not cell.is_empty: return False
+        return True
     
-    # def update(self) -> None:
-    #     if self.can_move(): self.move_cells()
-    #     else: self.current_shape = None
+    def move_cells(self) -> None:
+        if not self.can_move(): return
+        for x, y in self.current_shape:
+            self.get_cell(x, y).set_content(None)
+        for i, (x, y) in enumerate(self.current_shape):
+            self.get_cell(x, y+1).set_content(self.current_content)
+            self.current_shape[i][1] += 1
+    
+    def update(self) -> None:
+        if self.can_move(): self.move_cells()
+        else: self.current_shape = None
     
     def draw(self, surface: pg.Surface) -> None:
         for cell in self.cells: cell.render(surface)
