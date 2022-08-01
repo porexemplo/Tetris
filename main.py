@@ -23,7 +23,7 @@ def main():
     pg.display.update()
 
     while 1:    # Main game loop
-        clock.tick(25)
+        clock.tick(FPS)
         for event in pg.event.get():
             if event.type == pg.QUIT: return
         
@@ -31,8 +31,7 @@ def main():
         update_window()
         grid.set_border()
         grid.draw(SCREEN)
-        pg.display.update()
-        
+        pg.display.update()        
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 from random import randint
+from copy import deepcopy
 import pygame as pg
 from game_data import *
 
@@ -46,18 +47,17 @@ class Grid:
         return self.cells[x+y*W_BOUND_COLUMNS]
 
     def set_current_shape(self) -> None:
-        if self.current_shape is not None: return
-        self.current_shape = SHAPES[randint(0, 3)]
+        self.current_shape = deepcopy(SHAPES[randint(0, 3)])
         self.current_content = randint(0, 5)
         for x, y in self.current_shape:
             self.get_cell(x, y).set_content(self.current_content)
 
     def get_lower_cells(self) -> list():
         checked = dict()
-        for coord in self.current_shape:
-            if str(coord[0]) not in checked:
-                checked[str(coord[0])] = coord[1]; pass
-            checked[str(coord[0])] = max(coord[1], checked[str(coord[0])])
+        for x, y in self.current_shape:
+            if str(x) not in checked:
+                checked[str(x)] = y; pass
+            checked[str(x)] = max(y, checked[str(x)])
         return [(int(i), j) for i, j in checked.items()]
 
     def can_move(self) -> bool:
@@ -67,7 +67,6 @@ class Grid:
         return True
     
     def move_cells(self) -> None:
-        if not self.can_move(): return
         for x, y in self.current_shape:
             self.get_cell(x, y).set_content(None)
         for i, (x, y) in enumerate(self.current_shape):
@@ -75,8 +74,12 @@ class Grid:
             self.current_shape[i][1] += 1
     
     def update(self) -> None:
-        if self.can_move(): self.move_cells()
-        else: self.current_shape = None
+        if self.current_shape is None:
+            return self.set_current_shape()
+        if self.can_move():
+            self.move_cells()
+        else:
+            self.current_shape = None
     
     def draw(self, surface: pg.Surface) -> None:
         for cell in self.cells: cell.render(surface)
