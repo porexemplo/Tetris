@@ -28,8 +28,8 @@ class Cell:
 class Grid:
     def __init__(self) -> None:
         self.cells: list = [
-        Cell(None, i, j) for i in range(W_BOUND_COLUMNS)
-            for j in range(H_BOUND_COLUMNS)
+        Cell(None, x, y) for y in range(H_BOUND_COLUMNS) 
+        for x in range(W_BOUND_COLUMNS)
         ]
         self.current_shape = None
     
@@ -41,16 +41,18 @@ class Grid:
                 cell.set_content(GREY)
     
     def get_cell(self, x, y) -> Cell:
-        for i, cell in enumerate(self.cells):
-            if cell.x == x and cell.y == y:
-                return i
+        return self.cells[x+y*W_BOUND_COLUMNS]
 
     def set_current_shape(self) -> None:
         if self.current_shape is not None: return
         self.current_shape = SHAPES[randint(0, 3)]
         temp_content = randint(0, 5)
-        for coord in self.current_shape:
-            self.cells[self.get_cell(coord[0], coord[1])].set_content(temp_content)
+        for x, y in self.current_shape:
+            self.get_cell(x, y).set_content(temp_content)
+    
+    # def update(self) -> None:
+    #     if self.can_move(): self.move_cells()
+    #     else: self.current_shape = None
     
     def draw(self, surface: pg.Surface) -> None:
         for cell in self.cells: cell.render(surface)
