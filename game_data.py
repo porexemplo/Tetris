@@ -19,11 +19,18 @@ FPS = 4
 CELL_WIDTH = (.70*WIDTH) // W_BOUND_COLUMNS
 CELL_HEIGHT = HEIGHT // H_BOUND_COLUMNS
 
+# Images
 IMAGE_SET = [
     pg.transform.scale(pg.image.load(os.path.join('assets', 'sq_' + str(i) + '.png')),
         (CELL_WIDTH, CELL_HEIGHT))
         for i in range(0, 7)
 ]
+
+GAME_OVER_SCREEN = pg.transform.scale(pg.image.load(os.path.join('assets', 'game_over.png')),
+                   (WIDTH, HEIGHT))
+
+# Events
+GAME_OVER = pg.USEREVENT + 1
 
 # Shapes
 SHAPE_L = [

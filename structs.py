@@ -50,6 +50,9 @@ class Grid:
         self.current_shape = deepcopy(SHAPES[randint(0, 3)])
         self.current_content = randint(0, 5)
         for x, y in self.current_shape:
+            if not self.get_cell(x, y).is_empty:
+                pg.event.post(pg.event.Event(GAME_OVER))
+                return None
             self.get_cell(x, y).set_content(self.current_content)
 
     def get_lower_cells(self) -> list():
@@ -63,7 +66,7 @@ class Grid:
     def can_move(self) -> bool:
         bellow_cells = [self.get_cell(x, y+1) for x, y in self.get_lower_cells()]
         for cell in bellow_cells:
-            if cell == None or not cell.is_empty: return False
+            if cell is None or not cell.is_empty: return False
         return True
     
     def move_cells(self) -> None:

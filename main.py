@@ -26,6 +26,14 @@ def main():
         clock.tick(FPS)
         for event in pg.event.get():
             if event.type == pg.QUIT: return
+            if event.type == GAME_OVER:
+                SCREEN.blit(GAME_OVER_SCREEN, (0, 0))
+                pg.display.update()
+                while True:
+                    clock.tick(FPS)
+                    for event in pg.event.get():
+                        if event.type == pg.QUIT: return
+                
         
         grid.update()
         update_window()
