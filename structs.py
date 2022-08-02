@@ -63,13 +63,13 @@ class Grid:
             checked[str(x)] = max(y, checked[str(x)])
         return [(int(i), j) for i, j in checked.items()]
 
-    def can_move(self) -> bool:
+    def can_move_down(self) -> bool:
         bellow_cells = [self.get_cell(x, y+1) for x, y in self.get_lower_cells()]
         for cell in bellow_cells:
             if cell is None or not cell.is_empty: return False
         return True
     
-    def move_cells(self) -> None:
+    def move_cells_down(self) -> None:
         for x, y in self.current_shape:
             self.get_cell(x, y).set_content(None)
         for i, (x, y) in enumerate(self.current_shape):
@@ -79,8 +79,8 @@ class Grid:
     def update(self) -> None:
         if self.current_shape is None:
             return self.set_current_shape()
-        if self.can_move():
-            self.move_cells()
+        if self.can_move_down():
+            self.move_cells_down()
         else:
             self.current_shape = None
     

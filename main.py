@@ -33,6 +33,9 @@ def main():
                     clock.tick(FPS)
                     for event in pg.event.get():
                         if event.type == pg.QUIT: return
+                        if event.type == pg.KEYDOWN:
+                            if event.key == pg.K_r: return main()
+                            if event.key == pg.K_q: return pg.QUIT
                 
         
         grid.update()
