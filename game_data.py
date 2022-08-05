@@ -14,7 +14,8 @@ SCREEN = pg.display.set_mode((WIDTH, HEIGHT))
 W_BOUND_COLUMNS = 12
 H_BOUND_COLUMNS = 21
 
-FPS = 4
+FPS = 30
+C_FRAME = 0
 
 CELL_WIDTH = (.70*WIDTH) // W_BOUND_COLUMNS
 CELL_HEIGHT = HEIGHT // H_BOUND_COLUMNS
@@ -31,6 +32,7 @@ GAME_OVER_SCREEN = pg.transform.scale(pg.image.load(os.path.join('assets', 'game
 
 # Events
 GAME_OVER = pg.USEREVENT + 1
+UPDATE = pg.USEREVENT + 2
 
 # Shapes
 SHAPE_L = [
