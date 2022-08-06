@@ -12,6 +12,19 @@ def update_window():
     SCREEN.fill(RGB_BLACK)
 
 
+def get_user_input(grid):
+    keys = pg.key.get_pressed()
+    if keys[pg.K_LEFT] or keys[pg.K_a]:
+        try:
+            grid.move_left()
+        except TypeError: pass
+
+    if keys[pg.K_RIGHT] or keys[pg.K_d]:
+        try:
+            grid.move_right()
+        except TypeError: pass
+
+
 def main():
     grid = Grid()
     pg.init()
@@ -25,13 +38,11 @@ def main():
 
     while 1:    # Main game loop
         clock.tick(FPS)
+        get_user_input(grid)
         for event in pg.event.get():
             if event.type == pg.QUIT: return
             if event.type == pg.KEYDOWN:
-                if event.key in [pg.K_LEFT, pg.K_a]:
-                    if grid.can_move_left(): grid.move_left()
-                if event.key in [pg.K_RIGHT, pg.K_d]:
-                    if grid.can_move_right(): grid.move_right()
+                pass
             if event.type == UPDATE:
                 grid.update()
             if event.type == GAME_OVER:
@@ -44,7 +55,6 @@ def main():
                         if event.type == pg.KEYDOWN:
                             if event.key == pg.K_r: return main()
                             if event.key == pg.K_q: return pg.QUIT
-                
         update_window()
         grid.set_border()
         grid.draw(SCREEN)
