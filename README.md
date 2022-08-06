@@ -27,3 +27,7 @@
 ##### [02.08.22] Enhanced "Game Over" screen
 
 <img width="400" align="center" src="https://user-images.githubusercontent.com/62790552/182345870-27b94e0c-9aba-40e7-b34c-3b26fd0fd791.png">
+
+##### [06.08.22] Added and Improved Left / Right Mouvement (FPS 24 for left/right/fast_down && FPS 10 for default down mvmt)
+
+<img width="400" align="center" src="https://user-images.githubusercontent.com/62790552/183264216-288e1a08-9946-4a2e-bedc-0d2969eaf628.png">
