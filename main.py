@@ -21,7 +21,7 @@ def main():
     grid.set_current_shape()
     grid.draw(SCREEN)
     pg.display.update()
-    pg.time.set_timer(UPDATE, 30*1000/FPS)
+    pg.time.set_timer(UPDATE, 30*1000//FPS)
 
     while 1:    # Main game loop
         clock.tick(FPS)
