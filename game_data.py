@@ -3,6 +3,7 @@ from screeninfo import get_monitors
 import os
 
 
+# Game Settings
 SCREEN_WIDTH = get_monitors()[0].width
 SCREEN_HEIGHT = get_monitors()[0].height
 
@@ -67,3 +68,19 @@ GREEN   = 5
 GREY    = 6
 
 RGB_BLACK = (0, 0, 0)
+RGB_LIGHT_YELLOW = (253, 255, 146)
+
+# Fonts & Text
+pg.font.init()
+FONT_SIZE = 23
+FONT = pg.font.Font(os.path.join('assets', 'fonts', 'spacemono_regular.ttf'), FONT_SIZE)
+
+SCORE_STR = FONT.render("Score :", True, RGB_LIGHT_YELLOW)
+LINES_STR = FONT.render("Lines :", True, RGB_LIGHT_YELLOW)
+NEXT_STR = FONT.render("Next :", True, RGB_LIGHT_YELLOW)
+
+SCORE_RECT = SCORE_STR.get_rect()
+LINES_RECT = LINES_STR.get_rect()
+NEXT_RECT = NEXT_STR.get_rect()
+
+TEXT = [SCORE_STR, LINES_STR, NEXT_STR]

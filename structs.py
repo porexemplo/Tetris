@@ -125,6 +125,11 @@ class Grid:
             self.move_cells_down()
         else:
             self.current_shape = None
-    
+
+    def render_text(self, surface: pg.Surface) -> None:
+        for i, text in enumerate(TEXT):
+            surface.blit(text, ((W_BOUND_COLUMNS+1)*CELL_WIDTH, int(.1*(.8*i+1)*HEIGHT)))
+
     def draw(self, surface: pg.Surface) -> None:
         for cell in self.cells: cell.render(surface)
+        self.render_text(surface)
