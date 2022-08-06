@@ -23,6 +23,8 @@ def get_user_input(grid):
         try:
             if grid.can_move_right(): grid.move_right()
         except TypeError: pass
+    if keys[pg.K_DOWN] or keys[pg.K_s]:
+        grid.update()
 
 
 def main():
@@ -34,7 +36,7 @@ def main():
     grid.set_current_shape()
     grid.draw(SCREEN)
     pg.display.update()
-    pg.time.set_timer(UPDATE, 30*1000//FPS)
+    pg.time.set_timer(UPDATE, 10*1000//FPS)
 
     while 1:    # Main game loop
         clock.tick(FPS)
