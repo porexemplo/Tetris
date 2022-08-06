@@ -16,12 +16,12 @@ def get_user_input(grid):
     keys = pg.key.get_pressed()
     if keys[pg.K_LEFT] or keys[pg.K_a]:
         try:
-            grid.move_left()
+            if grid.can_move_left(): grid.move_left()
         except TypeError: pass
 
     if keys[pg.K_RIGHT] or keys[pg.K_d]:
         try:
-            grid.move_right()
+            if grid.can_move_right(): grid.move_right()
         except TypeError: pass
 
 

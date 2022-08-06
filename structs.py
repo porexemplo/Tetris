@@ -69,7 +69,7 @@ class Grid:
             if str(y) not in checked:
                 checked[str(y)] = x; pass
             checked[str(y)] = max(x, checked[str(y)])
-        return [(int(i), j) for i, j in checked.items()]
+        return [(j, int(i)) for i, j in checked.items()]
 
     def get_left_cells(self) -> list():
         checked = dict()
@@ -77,7 +77,7 @@ class Grid:
             if str(y) not in checked:
                 checked[str(y)] = x; pass
             checked[str(y)] = min(x, checked[str(y)])
-        return [(int(i), j) for i, j in checked.items()]
+        return [(j, int(i)) for i, j in checked.items()]
 
     def can_move_down(self) -> bool:
         bellow_cells = [self.get_cell(x, y+1) for x, y in self.get_lower_cells()]
