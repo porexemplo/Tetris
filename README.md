@@ -4,6 +4,10 @@
 - **pygame** `python3 -m pip install -U pygame --user`
 - **screeninfo** `python3 -m pip install screeninfo`
 
+### Score Calculation
+Left as an exercise to the reader.
+See this [Codewars KATA](https://www.codewars.com/kata/5da9af1142d7910001815d32) for more info.
+
 ---
 ### LOGs
 
