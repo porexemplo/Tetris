@@ -31,3 +31,7 @@
 ##### [06.08.22] Added and Improved Left / Right Mouvement (FPS 24 for left/right/fast_down && FPS 10 for default down mvmt)
 
 <img width="400" align="center" src="https://user-images.githubusercontent.com/62790552/183264216-288e1a08-9946-4a2e-bedc-0d2969eaf628.png">
+
+##### [06.08.22] Picked main font and added text rendering functions
+
+<img width="400" align="center" src="https://user-images.githubusercontent.com/62790552/183265131-b92aed4f-7cf6-43eb-8035-b9b4ae47a422.png">
