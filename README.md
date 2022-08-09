@@ -35,3 +35,7 @@
 ##### [06.08.22] Picked main font and added text rendering functions
 
 <img width="400" align="center" src="https://user-images.githubusercontent.com/62790552/183265131-b92aed4f-7cf6-43eb-8035-b9b4ae47a422.png">
+
+##### [09.08.22] Designed and added a pause screen with user-input detection
+
+<img width="400" align="center" src="https://user-images.githubusercontent.com/62790552/183620358-351068b0-d1da-45cd-bb9d-70aef324e446.png">
