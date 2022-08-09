@@ -72,6 +72,9 @@ GREY    = 6
 RGB_BLACK = (0, 0, 0)
 RGB_LIGHT_YELLOW = (253, 255, 146)
 
+# Score sheet
+SCORE_SHEET = [0, 40, 100, 300, 1200]
+
 # Fonts & Text
 pg.font.init()
 FONT_SIZE = 23

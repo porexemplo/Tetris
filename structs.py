@@ -49,6 +49,7 @@ class Grid:
 
     def set_current_shape(self) -> None:
         self.current_shape = deepcopy(SHAPES[randint(0, 3)])
+        self.current_shape = deepcopy(SHAPES[2])
         self.current_content = randint(0, 5)
         for x, y in self.current_shape:
             if not self.get_cell(x, y).is_empty:
@@ -139,20 +140,33 @@ class Grid:
         self.remove_line(y)
         self.shift_down(start=y)
 
+    def update_score(self, line_count: int) -> None:
+        self.data['score'] += SCORE_SHEET[line_count]
+
     def update(self) -> None:
         if self.current_shape is None:
             return self.set_current_shape()
         if self.can_move_down():
             self.move_cells_down()
         else:
+            line_count = 0
             for _, line in self.current_shape:
                 if self.line_full(line):
+                    line_count += 1
                     self.reset_line(line)
+            self.update_score(line_count)
             self.current_shape = None
 
     def render_text(self, surface: pg.Surface) -> None:
+        # Constant text
         for i, text in enumerate(TEXT):
             surface.blit(text, ((W_BOUND_COLUMNS+1)*CELL_WIDTH, int(.1*(.8*i+1)*HEIGHT)))
+        
+        score_text = FONT.render(str(self.data.get('score')), True, RGB_LIGHT_YELLOW)
+        lines_text = FONT.render(str(self.data.get('lines')), True, RGB_LIGHT_YELLOW)
+
+        surface.blit(score_text, ((W_BOUND_COLUMNS+1.2)*CELL_WIDTH, int(.14*HEIGHT)))
+        surface.blit(lines_text, ((W_BOUND_COLUMNS+1.2)*CELL_WIDTH, int(.122*1.8*HEIGHT)))
 
     def draw(self, surface: pg.Surface) -> None:
         for cell in self.cells: cell.render(surface)
