@@ -44,7 +44,18 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT: return
             if event.type == pg.KEYDOWN:
-                pass
+                if event.key in [pg.K_p, pg.K_ESCAPE]:
+                    SCREEN.blit(PAUSE_SCREEN, (0, 0))
+                    pg.display.update()
+                    is_paused = True
+                    while is_paused:
+                        clock.tick(FPS)
+                        for event in pg.event.get():
+                            if event.type == pg.QUIT: return
+                            if event.type == pg.KEYDOWN:
+                                if event.key == pg.K_c: is_paused = False
+                                if event.key == pg.K_q: return
+                                if event.key == pg.K_r: return main()
             if event.type == UPDATE:
                 grid.update()
             if event.type == GAME_OVER:
@@ -56,7 +67,7 @@ def main():
                         if event.type == pg.QUIT: return
                         if event.type == pg.KEYDOWN:
                             if event.key == pg.K_r: return main()
-                            if event.key == pg.K_q: return pg.QUIT
+                            if event.key == pg.K_q: return
         update_window()
         grid.set_border()
         grid.draw(SCREEN)

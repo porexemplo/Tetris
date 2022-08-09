@@ -30,6 +30,8 @@ IMAGE_SET = [
 GAME_OVER_SCREEN = pg.transform.scale(pg.image.load(os.path.join('assets', 'game_over.png')),
                    (WIDTH, HEIGHT))
 
+PAUSE_SCREEN = pg.transform.scale(pg.image.load(os.path.join('assets', 'pause.png')), (WIDTH, HEIGHT))
+
 # Events
 GAME_OVER = pg.USEREVENT + 1
 UPDATE = pg.USEREVENT + 2
