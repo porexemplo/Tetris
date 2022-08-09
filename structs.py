@@ -34,6 +34,7 @@ class Grid:
         ]
         self.current_shape = None
         self.current_content = None
+        self.data = { 'score': 0, 'lines': 0 }
     
     def set_border(self) -> None:
         for cell in self.cells:
@@ -118,12 +119,35 @@ class Grid:
             self.get_cell(x+1, y).set_content(self.current_content)
             self.current_shape[i][0] += 1
     
+    def line_full(self, y) -> bool:
+        for x in range(W_BOUND_COLUMNS):
+            if self.get_cell(x, y).is_empty: return False
+        return True
+
+    def remove_line(self, y) -> None:
+        for x in range(W_BOUND_COLUMNS):
+            self.get_cell(x, y).set_content(None)
+    
+    def shift_down(self, start=0) -> None:
+        for y in range(start, 1, -1):
+            for x in range(W_BOUND_COLUMNS):
+                self.get_cell(x, y).set_content(self.get_cell(x, y-1).content)
+                
+
+    def reset_line(self, y) -> None:
+        self.data['lines'] += 1
+        self.remove_line(y)
+        self.shift_down(start=y)
+
     def update(self) -> None:
         if self.current_shape is None:
             return self.set_current_shape()
         if self.can_move_down():
             self.move_cells_down()
         else:
+            for _, line in self.current_shape:
+                if self.line_full(line):
+                    self.reset_line(line)
             self.current_shape = None
 
     def render_text(self, surface: pg.Surface) -> None:
