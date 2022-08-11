@@ -8,6 +8,8 @@
 Left as an exercise to the reader.
 See this [Codewars KATA](https://www.codewars.com/kata/5da9af1142d7910001815d32) for more info.
 
+### Rotation HELL
+
 ---
 ### LOGs
 
@@ -47,3 +49,5 @@ See this [Codewars KATA](https://www.codewars.com/kata/5da9af1142d7910001815d32)
 ##### [09.08.22] Add 'Next' functionality (used preloaded shape pictures for optimized rendering)
 
 <img width="400" align="center" src="https://user-images.githubusercontent.com/62790552/183766238-199a6518-a2af-4ec7-a421-7a5dce263efb.png">
+
+##### [11.08.22] Designed the 5th forgotten shape and implemented it
