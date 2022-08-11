@@ -35,6 +35,7 @@ class Grid:
         self.current_shape = None
         self.current_content = None
         self.data = { 'score': 0, 'lines': 0 }
+        self.next = {'shape': None, 'content': None}
     
     def set_border(self) -> None:
         for cell in self.cells:
@@ -47,10 +48,13 @@ class Grid:
         if x+y*W_BOUND_COLUMNS > len(self.cells): return None
         return self.cells[x+y*W_BOUND_COLUMNS]
 
+    def fetch_next(self) -> None:
+        self.next['shape'] = deepcopy(SHAPES[randint(0, 3)])
+        self.next['content'] = randint(0, 5)
+
     def set_current_shape(self) -> None:
-        self.current_shape = deepcopy(SHAPES[randint(0, 3)])
-        self.current_shape = deepcopy(SHAPES[2])
-        self.current_content = randint(0, 5)
+        self.current_shape = deepcopy(self.next.get('shape'))
+        self.current_content = self.next.get('content')
         for x, y in self.current_shape:
             if not self.get_cell(x, y).is_empty:
                 pg.event.post(pg.event.Event(GAME_OVER))
@@ -133,7 +137,6 @@ class Grid:
         for y in range(start, 1, -1):
             for x in range(W_BOUND_COLUMNS):
                 self.get_cell(x, y).set_content(self.get_cell(x, y-1).content)
-                
 
     def reset_line(self, y) -> None:
         self.data['lines'] += 1
@@ -143,9 +146,17 @@ class Grid:
     def update_score(self, line_count: int) -> None:
         self.data['score'] += SCORE_SHEET[line_count]
 
+    def render_next(self, surface: pg.Surface) -> None:
+        surface.blit(SETS_MAP.get(f'set_{SHAPES.index(self.next.get("shape"))}')[self.next.get('content')],
+        (
+            (W_BOUND_COLUMNS+2)*CELL_WIDTH,
+            int(.1*3.5*HEIGHT)
+        ))
+
     def update(self) -> None:
         if self.current_shape is None:
-            return self.set_current_shape()
+            self.set_current_shape()
+            return self.fetch_next()
         if self.can_move_down():
             self.move_cells_down()
         else:
@@ -171,3 +182,4 @@ class Grid:
     def draw(self, surface: pg.Surface) -> None:
         for cell in self.cells: cell.render(surface)
         self.render_text(surface)
+        self.render_next(surface)

@@ -10,6 +10,8 @@ SCREEN_HEIGHT = get_monitors()[0].height
 WIDTH = 0.5*SCREEN_HEIGHT
 HEIGHT = 0.6*SCREEN_HEIGHT
 
+RATIO = WIDTH/1000
+
 SCREEN = pg.display.set_mode((WIDTH, HEIGHT))
 
 W_BOUND_COLUMNS = 12
@@ -26,6 +28,16 @@ IMAGE_SET = [
         (CELL_WIDTH, CELL_HEIGHT))
         for i in range(0, 7)
 ]
+
+SETS_MAP = {
+    'set_0': [pg.image.load(os.path.join('assets', 'set_0', f'shape_0_{i}.png')) for i in range(6)],
+    'set_1': [pg.image.load(os.path.join('assets', 'set_1', f'shape_1_{i}.png')) for i in range(6)],
+    'set_2': [pg.image.load(os.path.join('assets', 'set_2', f'shape_2_{i}.png')) for i in range(6)],
+    'set_3': [pg.image.load(os.path.join('assets', 'set_3', f'shape_3_{i}.png')) for i in range(6)]
+}
+
+for key, value in SETS_MAP.items():
+    SETS_MAP[key] = [pg.transform.scale(img, (RATIO*img.get_width(), RATIO*img.get_height())) for img in value]
 
 GAME_OVER_SCREEN = pg.transform.scale(pg.image.load(os.path.join('assets', 'game_over.png')),
                    (WIDTH, HEIGHT))

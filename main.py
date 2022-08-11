@@ -33,6 +33,7 @@ def main():
     clock = pg.time.Clock()
     update_window()
     grid.set_border()
+    grid.fetch_next()
     grid.set_current_shape()
     grid.draw(SCREEN)
     pg.display.update()
