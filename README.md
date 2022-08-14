@@ -51,3 +51,5 @@ See this [Codewars KATA](https://www.codewars.com/kata/5da9af1142d7910001815d32)
 <img width="400" align="center" src="https://user-images.githubusercontent.com/62790552/183766238-199a6518-a2af-4ec7-a421-7a5dce263efb.png">
 
 ##### [11.08.22] Designed the 5th forgotten shape and implemented it
+
+<img width="400" align="center" src="https://user-images.githubusercontent.com/62790552/184553895-e113d7d0-d118-4059-bd79-b60b1be2238a.png">
