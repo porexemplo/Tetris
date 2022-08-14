@@ -33,7 +33,8 @@ SETS_MAP = {
     'set_0': [pg.image.load(os.path.join('assets', 'set_0', f'shape_0_{i}.png')) for i in range(6)],
     'set_1': [pg.image.load(os.path.join('assets', 'set_1', f'shape_1_{i}.png')) for i in range(6)],
     'set_2': [pg.image.load(os.path.join('assets', 'set_2', f'shape_2_{i}.png')) for i in range(6)],
-    'set_3': [pg.image.load(os.path.join('assets', 'set_3', f'shape_3_{i}.png')) for i in range(6)]
+    'set_3': [pg.image.load(os.path.join('assets', 'set_3', f'shape_3_{i}.png')) for i in range(6)],
+    'set_4': [pg.image.load(os.path.join('assets', 'set_4', f'shape_4_{i}.png')) for i in range(6)]
 }
 
 for key, value in SETS_MAP.items():
@@ -69,8 +70,12 @@ SHAPE_I = [
     [5, 2],
     [5, 3]
 ]
+SHAPE_T = [
+            [6, 0],
+    [5, 1], [6, 1], [7, 1]
+]
 
-SHAPES = [SHAPE_I, SHAPE_L, SHAPE_O, SHAPE_N]
+SHAPES = [SHAPE_I, SHAPE_L, SHAPE_O, SHAPE_N, SHAPE_T]
 
 # Colors
 YELLOW  = 0

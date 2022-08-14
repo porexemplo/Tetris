@@ -49,7 +49,7 @@ class Grid:
         return self.cells[x+y*W_BOUND_COLUMNS]
 
     def fetch_next(self) -> None:
-        self.next['shape'] = deepcopy(SHAPES[randint(0, 3)])
+        self.next['shape'] = deepcopy(SHAPES[randint(0, 4)])
         self.next['content'] = randint(0, 5)
 
     def set_current_shape(self) -> None:
