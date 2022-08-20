@@ -55,7 +55,7 @@ class Grid:
     def set_current_shape(self) -> None:
         self.current_shape = deepcopy(self.next.get('shape'))
         self.current_content = self.next.get('content')
-        for x, y in self.current_shape[0]:
+        for x, y in self.current_shape:
             if not self.get_cell(x, y).is_empty:
                 pg.event.post(pg.event.Event(GAME_OVER))
                 return None
@@ -63,7 +63,7 @@ class Grid:
 
     def get_lower_cells(self) -> list():
         checked = dict()
-        for x, y in self.current_shape[0]:
+        for x, y in self.current_shape:
             if str(x) not in checked:
                 checked[str(x)] = y; pass
             checked[str(x)] = max(y, checked[str(x)])
@@ -71,7 +71,7 @@ class Grid:
     
     def get_right_cells(self) -> list():
         checked = dict()
-        for x, y in self.current_shape[0]:
+        for x, y in self.current_shape:
             if str(y) not in checked:
                 checked[str(y)] = x; pass
             checked[str(y)] = max(x, checked[str(y)])
@@ -79,7 +79,7 @@ class Grid:
 
     def get_left_cells(self) -> list():
         checked = dict()
-        for x, y in self.current_shape[0]:
+        for x, y in self.current_shape:
             if str(y) not in checked:
                 checked[str(y)] = x; pass
             checked[str(y)] = min(x, checked[str(y)])
@@ -104,25 +104,25 @@ class Grid:
         return True
     
     def move_cells_down(self) -> None:
-        for x, y in self.current_shape[0]:
+        for x, y in self.current_shape:
             self.get_cell(x, y).set_content(None)
-        for i, (x, y) in enumerate(self.current_shape[0]):
+        for i, (x, y) in enumerate(self.current_shape):
             self.get_cell(x, y+1).set_content(self.current_content)
-            self.current_shape[0][i][1] += 1
+            self.current_shape[i][1] += 1
     
     def move_left(self) -> None:
-        for x, y in self.current_shape[0]:
+        for x, y in self.current_shape:
             self.get_cell(x, y).set_content(None)
-        for i, (x, y) in enumerate(self.current_shape[0]):
+        for i, (x, y) in enumerate(self.current_shape):
             self.get_cell(x-1, y).set_content(self.current_content)
-            self.current_shape[0][i][0] -= 1
+            self.current_shape[i][0] -= 1
 
     def move_right(self) -> None:
-        for x, y in self.current_shape[0]:
+        for x, y in self.current_shape:
             self.get_cell(x, y).set_content(None)
-        for i, (x, y) in enumerate(self.current_shape[0]):
+        for i, (x, y) in enumerate(self.current_shape):
             self.get_cell(x+1, y).set_content(self.current_content)
-            self.current_shape[0][i][0] += 1
+            self.current_shape[i][0] += 1
 
     def line_full(self, y) -> bool:
         for x in range(W_BOUND_COLUMNS):
@@ -158,20 +158,20 @@ class Grid:
         return np.fliplr(M.transpose()).tolist()
     
     def get_matrix(self) -> list:
-        max_x = max(i for i in [c[0] for c in self.current_shape[0]])
-        max_y = max(i for i in [c[1] for c in self.current_shape[0]])
-        min_x = min(i for i in [c[0] for c in self.current_shape[0]])
-        min_y = min(i for i in [c[1] for c in self.current_shape[0]])
+        max_x = max(i for i in [c[0] for c in self.current_shape])
+        max_y = max(i for i in [c[1] for c in self.current_shape])
+        min_x = min(i for i in [c[0] for c in self.current_shape])
+        min_y = min(i for i in [c[1] for c in self.current_shape])
 
         # constructing the matrix
         matrix = [[0 for i in range(max_x-min_x+1)] for j in range(max_y-min_y+1)]
 
         # standardizing coords
-        for i, coord in enumerate(self.current_shape[0]):
-            self.current_shape[0][i] = [coord[0]-min_x, coord[1]-min_y]
+        for i, coord in enumerate(self.current_shape):
+            self.current_shape[i] = [coord[0]-min_x, coord[1]-min_y]
         
         # filling the matrix
-        for coord in self.current_shape[0]:
+        for coord in self.current_shape:
             matrix[coord[1]][coord[0]] = 1
 
         return matrix
@@ -184,7 +184,7 @@ class Grid:
             self.move_cells_down()
         else:
             line_count = 0
-            for _, line in self.current_shape[0]:
+            for _, line in self.current_shape:
                 if self.line_full(line):
                     line_count += 1
                     self.reset_line(line)

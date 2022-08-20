@@ -75,13 +75,7 @@ SHAPE_T = [
     [5, 1], [6, 1], [7, 1]
 ]
 
-SHAPES = [
-    (SHAPE_I, [6, 1]),
-    (SHAPE_L, [5, 2]),
-    (SHAPE_O, None),
-    (SHAPE_N, [5, 1]),
-    (SHAPE_T, [6, 1])
-]
+SHAPES = [SHAPE_I, SHAPE_L, SHAPE_O, SHAPE_N, SHAPE_T]
 
 # Colors
 YELLOW  = 0
