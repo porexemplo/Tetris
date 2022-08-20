@@ -1,6 +1,7 @@
 from random import randint
 from copy import deepcopy
 import pygame as pg
+import numpy as np
 from game_data import *
 
 
@@ -22,7 +23,6 @@ class Cell:
     def set_content(self, content) -> None:
         self.content = content
         self.is_empty = True if content is None else False
-
 
 
 
@@ -123,7 +123,7 @@ class Grid:
         for i, (x, y) in enumerate(self.current_shape):
             self.get_cell(x+1, y).set_content(self.current_content)
             self.current_shape[i][0] += 1
-    
+
     def line_full(self, y) -> bool:
         for x in range(W_BOUND_COLUMNS):
             if self.get_cell(x, y).is_empty: return False
@@ -132,7 +132,7 @@ class Grid:
     def remove_line(self, y) -> None:
         for x in range(W_BOUND_COLUMNS):
             self.get_cell(x, y).set_content(None)
-    
+
     def shift_down(self, start=0) -> None:
         for y in range(start, 1, -1):
             for x in range(W_BOUND_COLUMNS):
@@ -152,6 +152,29 @@ class Grid:
             (W_BOUND_COLUMNS+2)*CELL_WIDTH,
             int(.1*3.5*HEIGHT)
         ))
+    
+    def rotate_matrix(list_matrix: list) -> list:
+        M = np.matrix(list_matrix)
+        return np.fliplr(M.transpose()).tolist()
+    
+    def get_matrix(self) -> list:
+        max_x = max(i for i in [c[0] for c in self.current_shape])
+        max_y = max(i for i in [c[1] for c in self.current_shape])
+        min_x = min(i for i in [c[0] for c in self.current_shape])
+        min_y = min(i for i in [c[1] for c in self.current_shape])
+
+        # constructing the matrix
+        matrix = [[0 for i in range(max_x-min_x+1)] for j in range(max_y-min_y+1)]
+
+        # standardizing coords
+        for i, coord in enumerate(self.current_shape):
+            self.current_shape[i] = [coord[0]-min_x, coord[1]-min_y]
+        
+        # filling the matrix
+        for coord in self.current_shape:
+            matrix[coord[1]][coord[0]] = 1
+
+        return matrix
 
     def update(self) -> None:
         if self.current_shape is None:
